@@ -1,0 +1,66 @@
+{
+  "name": "ngrx-form",
+  "version": "1.0.0",
+  "description": "Form bindings for NGRX",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://amcdnl@github.com/amcdnl/ngrx-form.git"
+  },
+  "keywords": [
+    "ngrx",
+    "redux"
+  ],
+  "author": "Austin McDaniel",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/amcdnl/ngrx-form/issues"
+  },
+  "homepage": "https://github.com/amcdnl/ngrx-form#readme",
+  "peerDependencies": {
+    "@angular/core": "^5.0.0",
+    "@angular/forms": "^5.0.0",
+    "@ngrx/effects": ">=4.1.1 || >5.0.0",
+    "@ngrx/store": ">=4.1.1 || >5.0.0",
+    "rxjs": "^5.5.6"
+  },
+  "devDependencies": {
+    "@angular/compiler": "^5.0.0",
+    "@angular/compiler-cli": "^5.0.0",
+    "@angular/core": "^5.0.0",
+    "@angular/forms": "^5.0.0",
+    "@ngrx/effects": "^5.0.0",
+    "@ngrx/store": "^5.0.0",
+    "@types/jasmine": "^2.8.0",
+    "husky": "^0.14.3",
+    "jasmine": "^2.8.0",
+    "lint-staged": "^6.0.0",
+    "ng-packagr": "^2.0.0-rc.9",
+    "prettier": "^1.9.2",
+    "reflect-metadata": "^0.1.10",
+    "rxjs": "^5.5.6",
+    "tsickle": "^0.26.0",
+    "tslint": "^5.8.0",
+    "typescript": "^2.6.2",
+    "zone.js": "^0.8.4"
+  },
+  "ngPackage": {
+    "lib": {
+      "entryFile": "src/index.ts"
+    }
+  },
+  "lint-staged": {
+    "*.ts": [
+      "npm run prettier",
+      "git add"
+    ]
+  },
+  "prettier": {
+    "singleQuote": true,
+    "printWidth": 120,
+    "tabWidth": 2
+  }
+}

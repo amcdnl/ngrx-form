@@ -1,0 +1,33 @@
+{
+    "compilerOptions": {
+      "baseUrl": "tsconfig",
+      "lib": [
+        "es6"
+      ],
+      "module": "commonjs",
+      "moduleResolution": "node",
+      "experimentalDecorators": true,
+      "emitDecoratorMetadata": true,
+      "declaration": true,
+      "noEmitHelpers": false,
+      "noEmitOnError": false,
+      "rootDir": "src/",
+      "skipDefaultLibCheck": true,
+      "skipLibCheck": true,
+      "noImplicitAny": false,
+      "noUnusedLocals": true,
+      "strict": true,
+      "sourceMap": true,
+      "target": "es5",
+      "types": [
+        "jasmine"
+      ],
+      "outDir": "dist"
+    },
+    "include": [
+      "src/**/*"
+    ],
+    "exclude": [
+      "src/spec/**/*"
+    ]
+  }
