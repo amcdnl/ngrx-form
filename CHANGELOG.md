@@ -1,3 +1,6 @@
+# 1.1.4 - 1/29/18
+- Feat: Add `modelId` property
+
 # 1.1.3 - 1/29/18
 - Fix: Forms not getting CD from effects
 

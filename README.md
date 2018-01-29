@@ -41,6 +41,40 @@ import { FormState } from 'ngrx-form';
 export interface PizzaForm extends FormState<Pizza> {}
 ```
 
+the `FormState` interface is a interface you will map
+your form<=>model to. It looks like:
+
+```javascript
+export interface FormState<T> {
+  /**
+   * The model to bind to the form
+   */
+  model: T;
+
+  /**
+   * Id of the model. Seperate because
+   * this is typically not bound in
+   * a form
+   */
+  modelId?: string;
+
+  /**
+   * Key value pair of errors
+   */
+  errors?: { [k: string]: string };
+
+  /**
+   * Whether the form is dirty or not.
+   */
+  dirty?: boolean;
+
+  /**
+   * The status of the form
+   */
+  status?: string;
+}
+```
+
 then in the reducer populate the `model` object, this will vary based on
 your implementation but it should look something like this:
 
@@ -92,10 +126,10 @@ this.store.dispatch(
 ```
 
 The actions that it comes with out of the box are:
-- `UpdateFormStatus({ status, path })`
-- `UpdateFormValue({ value, path })`
-- `UpdateFormDirty({ dirty, path })`
-- `SetFormDisabled(path)`
-- `SetFormEnabled(path)`
-- `SetFormDirty(path)`
-- `SetFormPristine(path)`
+- `UpdateFormStatus({ status, path })` - Update the form status
+- `UpdateFormValue({ value, path })` - Update the form value
+- `UpdateFormDirty({ dirty, path })` - Update the form dirty status
+- `SetFormDisabled(path)` - Set the form to disabled
+- `SetFormEnabled(path)` - Set the form to enabled
+- `SetFormDirty(path)` - Set the form to dirty (shortcut for `UpdateFormDirty`)
+- `SetFormPristine(path)` - Set the form to prestine (shortcut for `UpdateFormDirty`)

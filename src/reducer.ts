@@ -2,6 +2,7 @@ import { FormActions } from './actions';
 
 export interface FormState<T> {
   model: T;
+  modelId?: string;
   errors?: { [k: string]: string };
   dirty?: boolean;
   status?: string;
