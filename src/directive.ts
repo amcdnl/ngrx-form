@@ -34,9 +34,9 @@ export class FormDirective implements OnInit, OnDestroy {
       .pipe(takeUntil(this._destroy$))
       .subscribe(dirty => {
         if (this._formGroupDirective.form.dirty !== dirty) {
-          if (dirty) {
+          if (dirty === true) {
             this._formGroupDirective.form.markAsDirty();
-          } else {
+          } else if (dirty === false) {
             this._formGroupDirective.form.markAsPristine();
           }
         }
@@ -47,9 +47,9 @@ export class FormDirective implements OnInit, OnDestroy {
       .pipe(takeUntil(this._destroy$))
       .subscribe(disabled => {
         if (this._formGroupDirective.form.disabled !== disabled) {
-          if (disabled) {
+          if (disabled === true) {
             this._formGroupDirective.form.disable();
-          } else {
+          } else if (disabled === false) {
             this._formGroupDirective.form.enable();
           }
         }
