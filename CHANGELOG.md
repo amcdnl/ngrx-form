@@ -1,3 +1,6 @@
+# 1.1.3 - 1/29/18
+- Fix: Forms not getting CD from effects
+
 # 1.1.2 - 1/29/18
 - Fix: Fix `SetPrestine` not working
 

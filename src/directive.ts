@@ -1,4 +1,4 @@
-import { Directive, Input, OnInit, OnDestroy } from '@angular/core';
+import { Directive, Input, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { FormGroupDirective } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Subject } from 'rxjs/Subject';
@@ -14,7 +14,11 @@ export class FormDirective implements OnInit, OnDestroy {
   private _destroy$ = new Subject<null>();
   private _updating = false;
 
-  constructor(private _store: Store<any>, private _formGroupDirective: FormGroupDirective) {}
+  constructor(
+    private _store: Store<any>,
+    private _formGroupDirective: FormGroupDirective,
+    private _cd: ChangeDetectorRef
+  ) {}
 
   ngOnInit() {
     this._store
@@ -25,6 +29,7 @@ export class FormDirective implements OnInit, OnDestroy {
           this._updating = false;
           if (model) {
             this._formGroupDirective.form.patchValue(model);
+            this._cd.markForCheck();
           }
         }
       });
@@ -36,8 +41,10 @@ export class FormDirective implements OnInit, OnDestroy {
         if (this._formGroupDirective.form.dirty !== dirty) {
           if (dirty === true) {
             this._formGroupDirective.form.markAsDirty();
+            this._cd.markForCheck();
           } else if (dirty === false) {
             this._formGroupDirective.form.markAsPristine();
+            this._cd.markForCheck();
           }
         }
       });
@@ -49,8 +56,10 @@ export class FormDirective implements OnInit, OnDestroy {
         if (this._formGroupDirective.form.disabled !== disabled) {
           if (disabled === true) {
             this._formGroupDirective.form.disable();
+            this._cd.markForCheck();
           } else if (disabled === false) {
             this._formGroupDirective.form.enable();
+            this._cd.markForCheck();
           }
         }
       });
