@@ -95,3 +95,7 @@ The actions that it comes with out of the box are:
 - `UpdateFormStatus({ status, path })`
 - `UpdateFormValue({ value, path })`
 - `UpdateFormDirty({ dirty, path })`
+- `SetFormDisabled(path)`
+- `SetFormEnabled(path)`
+- `SetFormDirty(path)`
+- `SetFormPristine(path)`

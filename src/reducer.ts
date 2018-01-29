@@ -31,6 +31,14 @@ export const form = (reducer: Function) => (state: any, action: any) => {
     return setValue(nextState, `${action.payload.path}.status`, action.payload.status);
   } else if (action.type === FormActions.UpdateDirty) {
     return setValue(nextState, `${action.payload.path}.dirty`, action.payload.dirty);
+  } else if (action.type === FormActions.SetDirty) {
+    return setValue(nextState, `${action.payload}.dirty`, true);
+  } else if (action.type === FormActions.SetPrestine) {
+    return setValue(nextState, `${action.payload}.dirty`, false);
+  } else if (action.type === FormActions.SetDisabled) {
+    return setValue(nextState, `${action.payload}.disabled`, true);
+  } else if (action.type === FormActions.SetEnabled) {
+    return setValue(nextState, `${action.payload}.disabled`, false);
   } else if (action.type === FormActions.UpdateErrors) {
     return setValue(nextState, `${action.payload.path}.errors`, { ...action.payload.errors });
   }

@@ -42,6 +42,19 @@ export class FormDirective implements OnInit, OnDestroy {
         }
       });
 
+    this._store
+      .select(state => getValue(state, `${this.path}.disabled`))
+      .pipe(takeUntil(this._destroy$))
+      .subscribe(disabled => {
+        if (this._formGroupDirective.form.disabled !== disabled) {
+          if (disabled) {
+            this._formGroupDirective.form.disable();
+          } else {
+            this._formGroupDirective.form.enable();
+          }
+        }
+      });
+
     this._formGroupDirective.valueChanges.pipe(takeUntil(this._destroy$)).subscribe(value => {
       this._updating = true;
       this._store.dispatch(

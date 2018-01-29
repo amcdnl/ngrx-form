@@ -4,7 +4,11 @@ export enum FormActions {
   UpdateStatus = '[Form] Update Status',
   UpdateValue = '[Form] Update Value',
   UpdateDirty = '[Form] Update Dirty',
-  UpdateErrors = '[Form] Update Errors'
+  SetDirty = '[Form] Set Dirty',
+  SetPrestine = '[Form] Set Prestine',
+  UpdateErrors = '[Form] Update Errors',
+  SetDisabled = '[Form] Disable Form',
+  SetEnabled = '[Form] Enable Form'
 }
 
 export class UpdateFormStatus implements Action {
@@ -22,7 +26,27 @@ export class UpdateFormDirty implements Action {
   constructor(public payload: { dirty: boolean | null; path: string }) {}
 }
 
+export class SetFormDirty implements Action {
+  readonly type = FormActions.SetDirty;
+  constructor(public payload: string) {}
+}
+
+export class SetFormPristine implements Action {
+  readonly type = FormActions.SetDirty;
+  constructor(public payload: string) {}
+}
+
 export class UpdateFormErrors implements Action {
   readonly type = FormActions.UpdateErrors;
   constructor(public payload: { errors: { [k: string]: string } | null; path: string }) {}
+}
+
+export class SetFormDisabled implements Action {
+  readonly type = FormActions.SetDisabled;
+  constructor(public payload: string) {}
+}
+
+export class SetFormEnabled implements Action {
+  readonly type = FormActions.SetEnabled;
+  constructor(public payload: string) {}
 }
