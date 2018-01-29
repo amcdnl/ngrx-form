@@ -1,4 +1,4 @@
-# ngrx-form
+# ngrx-form [![npm version](https://badge.fury.io/js/ngrx-form.svg)](https://badge.fury.io/js/ngrx-form)
 Reactive Form bindings for NGRX.
 
 See [changelog](CHANGELOG.md) for latest changes.
