@@ -2,7 +2,7 @@
   "name": "ngrx-form",
   "version": "1.0.0",
   "description": "Form bindings for NGRX",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "build": "ng-packagr -p package.json",
     "test": "ngc -p tsconfig.spec.json && jasmine dist/spec/*.spec.js",
@@ -17,7 +17,12 @@
   },
   "keywords": [
     "ngrx",
-    "redux"
+    "redux",
+    "state",
+    "store",
+    "state-mangement",
+    "reactive-forms",
+    "angular"
   ],
   "author": "Austin McDaniel",
   "license": "MIT",
