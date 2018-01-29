@@ -32,7 +32,7 @@ export class SetFormDirty implements Action {
 }
 
 export class SetFormPristine implements Action {
-  readonly type = FormActions.SetDirty;
+  readonly type = FormActions.SetPrestine;
   constructor(public payload: string) {}
 }
 

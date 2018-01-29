@@ -1,3 +1,6 @@
+# 1.1.2 - 1/29/18
+- Fix: Fix `SetPrestine` not working
+
 # 1.1.1 - 1/29/18
 - Fix: Forms getting set to enabled always
 
