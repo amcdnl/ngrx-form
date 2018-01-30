@@ -1,3 +1,6 @@
+# 1.2.1 - 1/30/18
+- Fix: Aot issues
+
 # 1.2.0 - 1/30/18
 - Feat: Add `debounce` and `clear` directive options.
 
