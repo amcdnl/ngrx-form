@@ -10,7 +10,7 @@ the reactive form accepts raw objects, as a result we end up monkey patching
 this back and forth. For more info on this, checkout [Reactive Forms with NGRX](https://medium.com/@amcdnl/reactive-angular-forms-with-ngrx-533a2f28c127) blog post.
 
 Binding the values is not the only thing we commonly do, its not un-typical
-to translate form dirty status or form errors. Typically workflows might include
+to translate form dirty status or form errors. Typical workflows might include
 reading the errors from the form to show in various decoupled components or for
 use in our effects or using the form dirty status to prevent users from leaving
 a page without saving but without binding a variable we have no way to reset
