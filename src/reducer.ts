@@ -24,24 +24,38 @@ const setValue = (obj, prop, val) => {
 };
 
 export const form = (reducer: Function) => (state: any, action: any) => {
-  const nextState = reducer(state, action);
+  let nextState = reducer(state, action);
 
-  if (action.type === FormActions.UpdateValue) {
-    return setValue(nextState, `${action.payload.path}.model`, { ...action.payload.value });
-  } else if (action.type === FormActions.UpdateStatus) {
-    return setValue(nextState, `${action.payload.path}.status`, action.payload.status);
-  } else if (action.type === FormActions.UpdateDirty) {
-    return setValue(nextState, `${action.payload.path}.dirty`, action.payload.dirty);
-  } else if (action.type === FormActions.SetDirty) {
-    return setValue(nextState, `${action.payload}.dirty`, true);
-  } else if (action.type === FormActions.SetPrestine) {
-    return setValue(nextState, `${action.payload}.dirty`, false);
-  } else if (action.type === FormActions.SetDisabled) {
-    return setValue(nextState, `${action.payload}.disabled`, true);
-  } else if (action.type === FormActions.SetEnabled) {
-    return setValue(nextState, `${action.payload}.disabled`, false);
-  } else if (action.type === FormActions.UpdateErrors) {
-    return setValue(nextState, `${action.payload.path}.errors`, { ...action.payload.errors });
+  if (action.type === FormActions.UpdateValue || action.type === FormActions.UpdateForm) {
+    nextState = setValue(nextState, `${action.payload.path}.model`, { ...action.payload.value });
+  }
+
+  if (action.type === FormActions.UpdateStatus || action.type === FormActions.UpdateForm) {
+    nextState = setValue(nextState, `${action.payload.path}.status`, action.payload.status);
+  }
+
+  if (action.type === FormActions.UpdateErrors || action.type === FormActions.UpdateForm) {
+    nextState = setValue(nextState, `${action.payload.path}.errors`, { ...action.payload.errors });
+  }
+
+  if (action.type === FormActions.UpdateDirty || action.type === FormActions.UpdateForm) {
+    nextState = setValue(nextState, `${action.payload.path}.dirty`, action.payload.dirty);
+  }
+
+  if (action.type === FormActions.SetDirty) {
+    nextState = setValue(nextState, `${action.payload}.dirty`, true);
+  }
+
+  if (action.type === FormActions.SetPrestine) {
+    nextState = setValue(nextState, `${action.payload}.dirty`, false);
+  }
+
+  if (action.type === FormActions.SetDisabled) {
+    nextState = setValue(nextState, `${action.payload}.disabled`, true);
+  }
+
+  if (action.type === FormActions.SetEnabled) {
+    nextState = setValue(nextState, `${action.payload}.disabled`, false);
   }
 
   return nextState;

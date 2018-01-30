@@ -2,14 +2,17 @@ import { Directive, Input, OnInit, OnDestroy, ChangeDetectorRef } from '@angular
 import { FormGroupDirective } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Subject } from 'rxjs/Subject';
-import { takeUntil } from 'rxjs/operators';
-import { UpdateFormStatus, UpdateFormValue, UpdateFormDirty, UpdateFormErrors } from './actions';
+import { takeUntil } from 'rxjs/operators/takeUntil';
+import { debounceTime } from 'rxjs/operators/debounceTime';
+import { UpdateFormStatus, UpdateFormValue, UpdateFormDirty, UpdateFormErrors, UpdateForm } from './actions';
 
 const getValue = (obj, prop) => prop.split('.').reduce((acc, part) => acc && acc[part], obj);
 
 @Directive({ selector: '[ngrxForm]' })
 export class FormDirective implements OnInit, OnDestroy {
   @Input('ngrxForm') path: string;
+  @Input('ngrxFormDebounce') debounce = 100;
+  @Input('ngrxFormClearOnDestroy') clearDestroy: boolean;
 
   private _destroy$ = new Subject<null>();
   private _updating = false;
@@ -64,42 +67,58 @@ export class FormDirective implements OnInit, OnDestroy {
         }
       });
 
-    this._formGroupDirective.valueChanges.pipe(takeUntil(this._destroy$)).subscribe(value => {
-      this._updating = true;
-      this._store.dispatch(
-        new UpdateFormValue({
-          path: this.path,
-          value
-        })
-      );
+    this._formGroupDirective.valueChanges
+      .pipe(debounceTime(this.debounce), takeUntil(this._destroy$))
+      .subscribe(value => {
+        this._updating = true;
+        this._store.dispatch(
+          new UpdateFormValue({
+            path: this.path,
+            value
+          })
+        );
 
-      this._store.dispatch(
-        new UpdateFormDirty({
-          path: this.path,
-          dirty: this._formGroupDirective.dirty
-        })
-      );
+        this._store.dispatch(
+          new UpdateFormDirty({
+            path: this.path,
+            dirty: this._formGroupDirective.dirty
+          })
+        );
 
-      this._store.dispatch(
-        new UpdateFormErrors({
-          path: this.path,
-          errors: this._formGroupDirective.errors
-        })
-      );
-    });
+        this._store.dispatch(
+          new UpdateFormErrors({
+            path: this.path,
+            errors: this._formGroupDirective.errors
+          })
+        );
+      });
 
-    this._formGroupDirective.statusChanges.pipe(takeUntil(this._destroy$)).subscribe(status => {
-      this._store.dispatch(
-        new UpdateFormStatus({
-          path: this.path,
-          status
-        })
-      );
-    });
+    this._formGroupDirective.statusChanges
+      .pipe(debounceTime(this.debounce), takeUntil(this._destroy$))
+      .subscribe(status => {
+        this._store.dispatch(
+          new UpdateFormStatus({
+            path: this.path,
+            status
+          })
+        );
+      });
   }
 
   ngOnDestroy() {
     this._destroy$.next();
     this._destroy$.complete();
+
+    if (this.clearDestroy) {
+      this._store.dispatch(
+        new UpdateForm({
+          path: this.path,
+          value: null,
+          dirty: null,
+          status: null,
+          errors: null
+        })
+      );
+    }
   }
 }

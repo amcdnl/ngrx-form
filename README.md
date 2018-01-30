@@ -5,8 +5,23 @@ See [changelog](CHANGELOG.md) for latest changes.
 
 ## Whats this do?
 Often when building Reactive Forms in Angular, you need to bind values from the
-store to form and vice versus. In addition to binding the values, you
-might want to get form status and errors. This utility does this all for you!
+store to form and vice versus. The values from the store are observable and
+the reactive form accepts raw objects, as a result we end up monkey patching
+this back and forth. For more info on this, checkout [Reactive Forms with NGRX](https://medium.com/@amcdnl/reactive-angular-forms-with-ngrx-533a2f28c127) blog post.
+
+Binding the values is not the only thing we commonly do, its not un-typical
+to translate form dirty status or form errors. Typically workflows might include
+reading the errors from the form to show in various decoupled components or for
+use in our effects or using the form dirty status to prevent users from leaving
+a page without saving but without binding a variable we have no way to reset
+the status of the form after a successful save from an effect.
+
+In addition to these issues we encounter, there are workflows where you want
+to fill out a form and leave and then come back and resume your current status.
+This is an excellent use case for stores and we can conquer that case with this utility.
+
+In a nutshell, this tool helps bridge the gaps between ngrx-store and reactive forms
+with a set of utilities and bindings to keep your forms and state in sync.
 
 ## Usage
 To get started, install the package:
@@ -112,6 +127,11 @@ export class PizzaComponent {
 ```
 
 Now anytime your form updates, your state will also reflect the new state.
+
+The directive also has 2 inputs you can utilize as well:
+
+- `ngrxFormDebounce: number` - Debounce the value changes to the form. Default value: `100`.
+- `ngrxFormClearOnDestroy: boolean` - Clear the state on destroy of the form.
 
 ### Actions
 In addition to it automatically keeping track of the form, you can also

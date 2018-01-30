@@ -1,3 +1,6 @@
+# 1.2.0 - 1/30/18
+- Feat: Add `debounce` and `clear` directive options.
+
 # 1.1.4 - 1/29/18
 - Feat: Add `modelId` property
 

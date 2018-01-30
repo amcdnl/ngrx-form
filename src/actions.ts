@@ -8,17 +8,31 @@ export enum FormActions {
   SetPrestine = '[Form] Set Prestine',
   UpdateErrors = '[Form] Update Errors',
   SetDisabled = '[Form] Disable Form',
-  SetEnabled = '[Form] Enable Form'
+  SetEnabled = '[Form] Enable Form',
+  UpdateForm = '[Form] Update Form'
 }
 
 export class UpdateFormStatus implements Action {
   readonly type = FormActions.UpdateStatus;
-  constructor(public payload: { status: string; path: string }) {}
+  constructor(public payload: { status: string | null; path: string }) {}
 }
 
 export class UpdateFormValue implements Action {
   readonly type = FormActions.UpdateValue;
   constructor(public payload: { value: any; path: string }) {}
+}
+
+export class UpdateForm implements Action {
+  readonly type = FormActions.UpdateForm;
+  constructor(
+    public payload: {
+      value: any;
+      errors: { [k: string]: string } | null;
+      dirty: boolean | null;
+      status: string | null;
+      path: string;
+    }
+  ) {}
 }
 
 export class UpdateFormDirty implements Action {
