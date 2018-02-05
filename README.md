@@ -108,7 +108,8 @@ export function pizzaReducer(state = pizzaDefaultState, action) {
 ### Form Setup
 In your component, you would implement the a reactive form and
 decorate the form with the `ngrxForm` directive with the path
-of your state object.
+of your state object. We are passing the _string_ path to `ngrxForm`.
+Our directive uses this path to connect itself to the store and setup bindings.
 
 ```javascript
 @Component({
